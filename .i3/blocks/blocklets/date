@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) date '+%d %B %Y - %k:%M:%S' ;;
+    *) date '+%k:%M:%S' ;;
+esac

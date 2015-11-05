@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# -----
+# Reloads i3 configuration
+# cat conf files before reload
+# ---------------------------
+
+# generate i3blocks config file
+sed -f $HOME/.colorize/current/generic.sed $HOME/.i3/blocks/bot.tpl > $HOME/.i3/blocks/bot
+
+cat ~/.colorize/current/i3.conf ~/.i3/config-* > ~/.i3/config
+i3-msg restart

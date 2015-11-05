@@ -1,0 +1,11 @@
+#!/bin/bash
+
+pulseaudio --start &
+compton &
+pasystray &
+clipit &
+unclutter &
+mpd &
+dunst &
+sh ~/.fehbg &
+redshift &

@@ -1,0 +1,32 @@
+#!/bin/bash
+TYPE="${1:-mem}"
+
+awk -v type=$TYPE '
+/^MemTotal:/ {
+    mem_total=$2
+}
+/^MemFree:/ {
+    mem_free=$2
+}
+/^Buffers:/ {
+    mem_free+=$2
+}
+/^Cached:/ {
+    mem_free+=$2
+}
+/^RootTotal:/ {
+    root_total=$2
+}
+/^RootFree:/ {
+    root_free=$2
+}
+END {
+    # full text
+    if (type == "root")
+        printf("%.1fG\n", (root_total-root_free)/1024/1024)
+    else
+        printf("%.1fG\n", mem_free/1024/1024)
+    # TODO: short text
+    # TODO: color (if less than X%)
+}
+' /proc/meminfo

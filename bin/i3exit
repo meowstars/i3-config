@@ -1,0 +1,35 @@
+#!/bin/sh
+lock() {
+    bash ~/.i3/scripts/i3lock-wrapper
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        umount /home/meow/Arkena/home
+        i3-msg exit
+        ;;
+    suspend)
+        umount /home/meow/Arkena/home
+        ~/sjbin/outdock && systemctl suspend -i
+        ;;
+    hibernate)
+        umount /home/meow/Arkena/home
+        ~/sjbin/outdock && systemctl hibernate -i
+        ;;
+    reboot)
+        umount /home/meow/Arkena/home
+        systemctl reboot
+        ;;
+    shutdown)
+        umount /home/meow/Arkena/home
+        systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

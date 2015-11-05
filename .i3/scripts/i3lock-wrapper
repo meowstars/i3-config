@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Copyright (c) 2013 Artem Shinkarov <artyom.shinkaroff@gmail.com>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+file1=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
+file2=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
+dual=$(xrandr | grep " connected" | grep "DP2")
+
+scrot -d0 "$file1"
+convert "$file1" -scale 10% -scale 1000% "$file2"
+if [ -z "$dual" ]; then
+    convert "$file2" /home/meow/Images/icons/lock.png -gravity center -composite -matte "$file1"
+else
+    convert "$file2" /home/meow/Images/icons/lock.png -geometry +1152+692 -composite -matte "$file1"
+    convert "$file1" /home/meow/Images/icons/lock.png -geometry +3115+692 -composite -matte "$file1"
+fi
+#convert "$file1" -blur 0x3 "$file2"
+i3lock -u -i "$file1"
+rm "$file1" "$file2"

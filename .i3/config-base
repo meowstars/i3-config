@@ -1,0 +1,448 @@
+# vim: ft=i3 foldmethod=marker
+# -----
+# i3 config file by Meow
+# <meow@meowstars.org>
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# ---------------------------
+
+# -----
+# General configuration  {{{1
+# ---------------------------
+
+# Mod key
+set $mod Mod1
+set $modb Mod4
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+focus_follows_mouse no
+mouse_warping output
+# Font
+font pango:DejaVu Sans Mono 7
+# Don't interrupt full screen
+popup_during_fullscreen smart
+# Wait some time before removing the 'urgent' state
+force_display_urgency_hint 500 ms
+# No automatic back and forth (annoying, since I like to hit binds multiple times :D)
+workspace_auto_back_and_forth no
+
+# -----
+# Environment variables  {{{1
+# ---------------------------
+
+# Terms
+set $term evilvte
+set $tmux $term -e tmux -2
+
+# Applications
+set $browser firefox
+set $home /home/meow
+
+# Output
+set $primary DP2
+# Workspace naming
+# Main screen
+set $ws11 1:
+set $ws12 2:
+set $ws13 3:
+set $ws14 4:
+set $ws15 5:~1
+set $ws16 6:~2
+set $ws17 7:~3
+set $ws18 8:~4
+set $ws19 9:~5
+set $ws10 10:~6
+
+# Second screen
+set $ws21 11:
+set $ws22 12:
+set $ws23 13:+1
+set $ws24 14:+2
+
+# -----
+# Start clients          {{{1
+# ---------------------------
+
+# start a terminal
+bindsym $mod+Return exec --no-startup-id $term
+bindsym $modb+Return exec --no-startup-id $term
+bindsym $mod+Shift+Return exec nautilus
+bindsym $mod+Ctrl+Return exec --no-startup-id $tmux
+# start dmenu
+bindsym $mod+BackSpace exec --no-startup-id $home/bin/dmenu_run
+
+# -----
+# Clients configuration  {{{1
+# ---------------------------
+
+# 3 pixels for new windows
+# new_window pixel 3
+# Hide borders
+hide_edge_borders both
+
+# Just 1pixel border for URxvt
+for_window [class="URxvt"] border 1pixel
+#for_window [class="Evilvte"] border 1pixel
+
+# Make some windows float
+for_window [instance="Download"] floating enable
+for_window [instance="Places"] floating enable
+for_window [instance="file_progress"] floating enable
+for_window [class="Gcolor3"] floating enable
+for_window [class="Gcr-prompter"] floating enable
+
+# Pulseaudio
+for_window [instance="paprefs"] floating enable
+for_window [instance="paman"] floating enable
+for_window [instance="pavucontrol"] floating enable
+for_window [instance="pavumeter"] floating enable
+
+# Firefox stuff
+assign [class="Firefox"] $ws12
+for_window [class="Firefox"] border 1pixel
+for_window [title="À propos de Mozilla Firefox"] floating enable
+for_window [title="About Mozilla Firefox"] floating enable
+for_window [title="Préférences de Firefox"] floating enable
+for_window [title="Firefox Preferences"] floating enable
+
+# Steam
+assign [title="Steam"] 
+for_window [class="Steam"] border 1pixel
+
+# Minecraft
+for_window [class="Minecraft 1.7.4"] fullscreen enable
+
+# -----
+# Clients handling       {{{1
+# ---------------------------
+
+# Kill focused window
+bindcode $mod+43 kill
+
+# Change focus
+bindcode $mod+44 focus left
+bindcode $mod+45 focus down
+bindcode $mod+46 focus up
+bindcode $mod+47 focus right
+
+# Move focused window
+bindcode $mod+Ctrl+44 move left
+bindcode $mod+Ctrl+45 move down
+bindcode $mod+Ctrl+46 move up
+bindcode $mod+Ctrl+47 move right
+
+# Scratchpad
+bindcode $mod+Shift+24 move scratchpad
+bindcode $mod+24 scratchpad show
+
+# -----
+# Containers handling    {{{1
+# ---------------------------
+
+# enter fullscreen mode for the focused container
+bindcode $mod+48 fullscreen
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Ctrl+space focus mode_toggle
+
+# focus the parent container
+bindcode $mod+25 focus parent
+# focus the child container
+bindcode $mod+26 focus child
+
+# -----
+# Workspaces             {{{1
+# ---------------------------
+
+# switch to workspace
+bindcode $mod+10 workspace $ws11
+bindcode $mod+11 workspace $ws12
+bindcode $mod+12 workspace $ws13
+bindcode $mod+13 workspace $ws14
+bindcode $mod+14 workspace $ws15
+bindcode $mod+15 workspace $ws16
+bindcode $mod+16 workspace $ws17
+bindcode $mod+17 workspace $ws18
+bindcode $mod+18 workspace $ws19
+bindcode $mod+19 workspace $ws10
+
+bindcode $modb+10 workspace $ws21
+bindcode $modb+11 workspace $ws22
+bindcode $modb+12 workspace $ws23
+bindcode $modb+13 workspace $ws24
+
+# move focused container to workspace
+bindcode $mod+Shift+10 move container to workspace $ws11
+bindcode $mod+Shift+11 move container to workspace $ws12
+bindcode $mod+Shift+12 move container to workspace $ws13
+bindcode $mod+Shift+13 move container to workspace $ws14
+bindcode $mod+Shift+14 move container to workspace $ws15
+bindcode $mod+Shift+15 move container to workspace $ws16
+bindcode $mod+Shift+16 move container to workspace $ws17
+bindcode $mod+Shift+17 move container to workspace $ws18
+bindcode $mod+Shift+18 move container to workspace $ws19
+bindcode $mod+Shift+19 move container to workspace $ws10
+
+bindcode $modb+Shift+10 move container to workspace $ws21
+bindcode $modb+Shift+11 move container to workspace $ws22
+bindcode $modb+Shift+12 move container to workspace $ws23
+bindcode $modb+Shift+13 move container to workspace $ws24
+
+# Assign workspaces
+workspace $ws11 output $primary
+workspace $ws12 output $primary
+workspace $ws13 output $primary
+workspace $ws14 output $primary
+workspace $ws15 output $primary
+workspace $ws16 output $primary
+workspace $ws17 output $primary
+workspace $ws18 output $primary
+workspace $ws19 output $primary
+workspace $ws10 output $primary
+workspace $ws21 output LVDS1
+workspace $ws22 output LVDS1
+workspace $ws23 output LVDS1
+workspace $ws24 output LVDS1
+
+# Move to urgent tagged workspaces
+bindsym $mod+space [urgent=latest] focus
+
+# Open named workspaces
+#bindsym $mod+Shift+t exec i3-input -F 'workspace %s' -P 'New workspace: '
+
+# Go back to the previous workspace
+bindsym $mod+Tab workspace back_and_forth
+
+# -----
+# Multi screens          {{{1
+# ---------------------------
+
+# -----
+# Sound commands         {{{1
+# ---------------------------
+
+# Sound volume
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -- -1%"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +1%"
+
+# MPD stuff
+bind 198 exec --no-startup-id "mpc toggle"
+bindsym $mod+less exec --no-startup-id "mpc prev"
+bindsym $mod+Shift+less exec --no-startup-id "mpc next"
+bindcode 171 exec --no-startup-id "mpc next"
+bindcode 172 exec --no-startup-id "mpc toggle"
+bindcode 173 exec --no-startup-id "mpc prev"
+
+# -----
+# Modes                  {{{1
+# ---------------------------
+
+# Mode to disable i3 binds (useful to use alt/win based binds in softwares)
+mode "no i3" {
+    # nothing to do…
+    # back to normal only
+    bindcode $mod+49 mode "default"
+}
+bindcode $mod+49 mode "no i3"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # Action for main keys
+    bindcode 44 resize shrink width 10 px or 10 ppt
+    bindcode 45 resize grow height 10 px or 10 ppt
+    bindcode 46 resize shrink height 10 px or 10 ppt
+    bindcode 47 resize grow width 10 px or 10 ppt
+
+    # Special action for space
+    bindsym space mode "default"
+
+    # Back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindcode $mod+38 mode "default"
+
+    # Go to another mode
+    bindcode $mod+39 mode "layout"
+    bindcode $mod+40 mode "move workspace"
+    bindcode $mod+41 mode "media"
+    bindcode $mod+42 mode "system"
+}
+bindcode $mod+38 mode "resize"
+
+# layout mode
+mode "layout" {
+    # Action for main keys
+    bindcode 44 split horizontal
+    bindcode 45 split vertical
+    bindcode 46 layout stacking
+    bindcode 47 layout tabbed
+    bindcode 48 layout toggle split
+
+    # Special actions
+    bindsym space split vertical, layout stacking, exec --no-startup-id $term, mode "default"
+    bindsym Shift+space layout tabbed, exec --no-startup-id $term, mode "default"
+    bindsym $mod+Return exec --no-startup-id $term, mode "default"
+
+    # Back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindcode $mod+39 mode "default"
+
+    # Go to another mode
+    bindcode $mod+38 mode "resize"
+    bindcode $mod+40 mode "move workspace"
+    bindcode $mod+41 mode "media"
+    bindcode $mod+42 mode "system"
+}
+bindcode $mod+39 mode "layout"
+
+# moving workspace mode
+mode "move workspace" {
+    bindcode 44 move workspace to output left
+    bindcode 45 move workspace to output down
+    bindcode 46 move workspace to output up
+    bindcode 47 move workspace to output right
+
+    # Still can change focus with mod pressed
+    bindcode $mod+44 focus output left
+    bindcode $mod+45 focus output down
+    bindcode $mod+46 focus output up
+    bindcode $mod+47 focus output right
+
+    # Special action for space
+    bindsym space mode "default"
+
+    # Back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindcode $mod+40 mode "default"
+
+    # Go to another mode
+    bindcode $mod+38 mode "resize"
+    bindcode $mod+39 mode "layout"
+    bindcode $mod+41 mode "media"
+    bindcode $mod+42 mode "system"
+}
+bindcode $mod+40 mode "move workspace"
+
+# media mode
+mode "media" {
+    bindcode 44 exec --no-startup-id "mpc prev"
+    bindcode 45 exec --no-startup-id "mpc volume -5"
+    bindcode 46 exec --no-startup-id "mpc volume +5"
+    bindcode 47 exec --no-startup-id "mpc next"
+    bindsym space exec --no-startup-id "mpc_toggle", mode "default"
+    bindsym Shift+space exec --no-startup-id "mpc stop", mode "default"
+    bindsym $mod+Return exec --no-startup-id "music-dmenu", mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindcode $mod+41 mode "default"
+
+    # Go to another mode
+    bindcode $mod+38 mode "resize"
+    bindcode $mod+39 mode "layout"
+    bindcode $mod+40 mode "move workspace"
+    bindcode $mod+42 mode "system"
+}
+bindcode $mod+41 mode "media"
+
+# system mode
+mode "system" {
+    # Action for main keys
+    bindcode 44 exec --no-startup-id i3exit lock, mode "default"
+    bindcode 45 exec --no-startup-id i3exit logout, mode "default"
+    bindcode 46 exec --no-startup-id i3exit suspend, mode "default"
+    bindcode 47 exec --no-startup-id i3exit hibernate, mode "default"
+
+    # Special actions
+    bindsym space exec --no-startup-id i3exit lock, mode "default"
+    # Brightness
+    bindcode 74 exec --no-startup-id xbacklight -set 20, mode "default"
+    bindcode 75 exec --no-startup-id xbacklight -set 100, mode "default"
+    # Redshift
+    bindcode 32 exec --no-startup-id pkill -USR1 redshift, mode "default"
+    # Pwgencip
+    bindcode 26 exec --no-startup-id /home/meow/.i3/scripts/pwgenclip, mode "default"
+
+    # Indock / outdock
+    bindcode 30 exec --no-startup-id /home/meow/sjbin/indock, mode "default"
+    bindcode 31 exec --no-startup-id /home/meow/sjbin/outdock, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindcode $mod+42 mode "default"
+
+    # Go to another mode
+    bindcode $mod+38 mode "resize"
+    bindcode $mod+39 mode "layout"
+    bindcode $mod+40 mode "move workspace"
+    bindcode $mod+41 mode "media"
+}
+bindcode $mod+42 mode "system"
+
+# -----
+# Misc commands          {{{1
+# ---------------------------
+
+# reload the configuration file
+bindcode $mod+35 reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindcode $mod+Shift+35 exec --no-startup-id sh ~/.i3/scripts/reload-conf
+# exit i3 (logs you out of your X session)
+bindcode $mod+Shift+57 exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# Toggle touchpad
+bindsym XF86TouchpadToggle exec --no-startup-id "synclient TouchpadOff=1"
+bindsym Shift+XF86TouchpadToggle exec --no-startup-id "synclient TouchpadOff=0"
+
+# -----
+# Bar configuration      {{{1
+# ---------------------------
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command i3blocks -c ~/.i3/blocks/bot
+    workspace_buttons yes
+    font pango: DejaVu Sans Mono 7
+    strip_workspace_numbers yes
+    position bottom
+    tray_output primary
+
+    colors {
+        background $background
+        statusline $foreground
+        separator  $foreground
+
+        focused_workspace $yellow $yellow $background
+        active_workspace $yellow $yellow $background
+        inactive_workspace $background $background $foreground
+        urgent_workspace $magenta $magenta $background
+    }
+}
+
+# -----
+# Startup launches       {{{1
+# ---------------------------
+
+# Session tools
+exec --no-startup-id sh ~/.i3/scripts/startup-base
+# Start Firefox on specific workspace
+exec --no-startup-id i3-msg 'workspace $ws12; exec firefox; workspace $ws11'
+
+# -----
+# Colors                 {{{1
+# ---------------------------
+
+# Clients
+#class                  border   backgr.  text
+client.focused          $yellow  $yellow  $background
+client.focused_inactive $black   $black   $foreground
+client.unfocused        $background $background $foreground
+client.urgent           $magenta $magenta $background
+client.background       $background
