@@ -17,7 +17,8 @@ floating_modifier $mod
 focus_follows_mouse no
 mouse_warping output
 # Font
-font pango:DejaVu Sans Mono 7
+#font pango:DejaVu Sans Mono 7
+font pango:System San Francisco Display 8
 # Don't interrupt full screen
 popup_during_fullscreen smart
 # Wait some time before removing the 'urgent' state
@@ -43,7 +44,7 @@ set $primary DP2
 # Main screen
 set $ws11 1:
 set $ws12 2:
-set $ws13 3:
+set $ws13 3:
 set $ws14 4:
 set $ws15 5:~1
 set $ws16 6:~2
@@ -409,20 +410,20 @@ bindsym Shift+XF86TouchpadToggle exec --no-startup-id "synclient TouchpadOff=0"
 bar {
     status_command i3blocks -c ~/.i3/blocks/bot
     workspace_buttons yes
-    font pango: DejaVu Sans Mono 7
+    #font pango: DejaVu Sans Mono 7
     strip_workspace_numbers yes
     position bottom
-    tray_output primary
+    #tray_output primary
 
     colors {
         background $background
         statusline $foreground
         separator  $foreground
 
-        focused_workspace $yellow $yellow $background
-        active_workspace $yellow $yellow $background
+        focused_workspace $bblue $bblue $bwhite
+        active_workspace $bblue $bblue $bwhite
         inactive_workspace $background $background $foreground
-        urgent_workspace $magenta $magenta $background
+        urgent_workspace $red $red $bwhite
     }
 }
 
@@ -441,8 +442,10 @@ exec --no-startup-id i3-msg 'workspace $ws12; exec firefox; workspace $ws11'
 
 # Clients
 #class                  border   backgr.  text
-client.focused          $yellow  $yellow  $background
-client.focused_inactive $black   $black   $foreground
+client.focused          $bblue  $bblue  $bwhite
+client.focused_inactive $blue   $blue   $bwhite
 client.unfocused        $background $background $foreground
-client.urgent           $magenta $magenta $background
+client.urgent           $red $red $bwhite
 client.background       $background
+
+hide_edge_borders both
