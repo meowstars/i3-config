@@ -66,7 +66,7 @@ set $ws24 14:+2
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $term
 bindsym $modb+Return exec --no-startup-id $term
-bindsym $mod+Shift+Return exec nautilus
+bindsym $mod+Shift+Return exec pcmanfm
 bindsym $mod+Ctrl+Return exec --no-startup-id $tmux
 # start dmenu
 bindsym $mod+BackSpace exec --no-startup-id $home/bin/dmenu_run
