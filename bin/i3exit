@@ -8,23 +8,23 @@ case "$1" in
         lock
         ;;
     logout)
-        umount /home/meow/Arkena/home
+        umount /home/meow/mnt/arkena/home
         i3-msg exit
         ;;
     suspend)
-        umount /home/meow/Arkena/home
+        umount /home/meow/mnt/Arkena/home
         ~/sjbin/outdock && systemctl suspend -i
         ;;
     hibernate)
-        umount /home/meow/Arkena/home
-        ~/sjbin/outdock && systemctl hibernate -i
+        umount /home/meow/mnt/Arkena/home
+        outdock; systemctl hibernate -i
         ;;
     reboot)
-        umount /home/meow/Arkena/home
+        umount /home/meow/mnt/Arkena/home
         systemctl reboot
         ;;
     shutdown)
-        umount /home/meow/Arkena/home
+        umount /home/meow/mnt/Arkena/home
         systemctl poweroff
         ;;
     *)
