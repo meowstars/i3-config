@@ -14,18 +14,22 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-file1=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
-file2=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
+filetmp=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
+fileresize=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 dual=$(xrandr | grep " connected" | grep "DP2")
+base="/home/meow/.colorize/current/wallpaper.png"
 
-scrot -d0 "$file1"
-convert "$file1" -scale 10% -scale 1000% "$file2"
+convert "$base" /home/meow/usr/pics/icons/lock.png -gravity center -composite -matte "$filetmp"
+convert "$filetmp" -resize 1366x768 "$fileresize"
+
 if [ -z "$dual" ]; then
-    convert "$file2" /home/meow/Images/icons/lock.png -gravity center -composite -matte "$file1"
+	final="$fileresize"
 else
-    convert "$file2" /home/meow/Images/icons/lock.png -geometry +1152+692 -composite -matte "$file1"
-    convert "$file1" /home/meow/Images/icons/lock.png -geometry +3115+692 -composite -matte "$file1"
+	filemerge=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
+	montage -mode concatenate -tile x1 -gravity south "$filetmp" "$fileresize" "$filemerge"
+	final="$filemerge"
 fi
-#convert "$file1" -blur 0x3 "$file2"
-i3lock -u -i "$file1"
-rm "$file1" "$file2"
+
+#feh "$final"
+i3lock -c 000000 -f -u -i "$final"
+rm "$filetmp" "$fileresize" "$filemerge"
