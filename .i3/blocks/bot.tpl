@@ -6,7 +6,7 @@ separator=false
 separator_block_width=0
 color=%%red%%
 
-[mpd blocklet]
+[music blocklet]
 command=~/.i3/blocks/blocklets/mpd2
 interval=3
 instance=
