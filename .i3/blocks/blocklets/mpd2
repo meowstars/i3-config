@@ -35,12 +35,18 @@ else:
         output = ' '
     short_output = output
     song = client.playlistid(client.status()['songid'])
-    albumartist = song[0]['albumartist']
-    albumartist = albumartist.replace('&', 'and')
-    title = song[0]['title'].replace('&', 'and')
-    output = ' - '.join([output, albumartist, title])
+    try:
+        left = song[0]['albumartist']
+    except KeyError:
+        left = song[0]['artist']
+    left = left.replace('&', 'and')
+    if button == LEFT_BUTTON:
+        right = song[0]['album'].replace('&', 'and')
+    else:
+        right = song[0]['title'].replace('&', 'and')
+    output = ' - '.join([output, left, right])
     output += ' '
-    short_output = ' - '.join([short_output, title])
+    short_output = ' - '.join([short_output, right])
     short_output += ' '
 
 print(output)
