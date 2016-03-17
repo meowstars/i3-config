@@ -387,6 +387,19 @@ mode "system" {
 }
 bindcode $mod+42 mode "system"
 
+# clip mode
+mode "clip" {
+    # Actions
+    bindcode 38 exec --no-startup-id clip-append
+    bindcode 39 exec --no-startup-id clip-replace-newline
+    bindcode 40 exec --no-startup-id clip-get
+    bindcode 41 exec --no-startup-id clip-reset
+
+    # back to normal
+    bindcode $mod+56 mode "default"
+}
+bindcode $mod+56 mode "clip"
+
 # -----
 # Misc commands          {{{1
 # ---------------------------
