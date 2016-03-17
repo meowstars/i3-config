@@ -1,0 +1,2 @@
+#!/bin/bash
+xclip $HOME/var/cache/clipboard
