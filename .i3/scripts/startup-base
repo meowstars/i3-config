@@ -3,7 +3,7 @@
 pulseaudio --start &
 compton &
 pasystray &
-clipit &
+glipper &
 unclutter &
 mopidy &
 nm-applet &
