@@ -7,7 +7,8 @@ separator_block_width=0
 color=%%red%%
 
 [music blocklet]
-command=~/.i3/blocks/blocklets/mpd2
+command=mm current
+#command=~/.i3/blocks/blocklets/mpd2
 interval=3
 instance=
 markup=pango

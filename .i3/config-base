@@ -331,13 +331,13 @@ bindcode $mod+40 mode "move workspace"
 
 # media mode
 mode "media" {
-    bindcode 44 exec --no-startup-id "mpc prev"
-    bindcode 45 exec --no-startup-id "mpc volume -5"
-    bindcode 46 exec --no-startup-id "mpc volume +5"
-    bindcode 47 exec --no-startup-id "mpc next"
-    bindsym space exec --no-startup-id "mpc_toggle", mode "default"
-    bindsym Shift+space exec --no-startup-id "mpc stop", mode "default"
-    bindsym $mod+Return exec --no-startup-id "music-dmenu", mode "default"
+    bindcode 44 exec --no-startup-id "mm prev"
+    bindcode 45 exec --no-startup-id "mm vol_down 5"
+    bindcode 46 exec --no-startup-id "mm vol_up 5"
+    bindcode 47 exec --no-startup-id "mm next"
+    bindsym space exec --no-startup-id "mm play", mode "default"
+    bindsym Shift+space exec --no-startup-id "mm stop", mode "default"
+    bindsym $mod+Return exec --no-startup-id "music-dmenu-spot", mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
