@@ -230,12 +230,12 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -- -1
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +1%"
 
 # MPD stuff
-bind 198 exec --no-startup-id "mpc toggle"
-bindsym $mod+less exec --no-startup-id "mpc prev"
-bindsym $mod+Shift+less exec --no-startup-id "mpc next"
-bindcode 171 exec --no-startup-id "mpc next"
-bindcode 172 exec --no-startup-id "mpc toggle"
-bindcode 173 exec --no-startup-id "mpc prev"
+bind 198 exec --no-startup-id "mm play"
+bindsym $mod+less exec --no-startup-id "mm prev"
+bindsym $mod+Shift+less exec --no-startup-id "mm next"
+bindcode 171 exec --no-startup-id "mm next"
+bindcode 172 exec --no-startup-id "mm play"
+bindcode 173 exec --no-startup-id "mm prev"
 
 # -----
 # Modes                  {{{1
