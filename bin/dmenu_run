@@ -1,5 +1,5 @@
-#!/bin/sh
-source $HOME/.colorize/current/colors.sh
+#!/bin/bash
+source $HOME/.colorize/current/colors_vars.sh
 cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 if [ -d "$cachedir" ]; then
 	cache=$cachedir/dmenu_run
@@ -9,8 +9,8 @@ fi
 (
 	IFS=:
 	if stest -dqr -n "$cache" $PATH; then
-		stest -flx $PATH | sort -u | tee "$cache" | dmenu2 -p "Run >" -dim 0.4 -nb "#404552" -nf "#b3bdcb" -sb "#5294e2" -sf "#ffffff" "$@"
+		stest -flx $PATH | sort -u | tee "$cache" | dmenu2 -p "Run >" -dim 0.4 -nb "$color_background" -nf "$color_foreground" -sb "$color_blue" -sf "$color_background" "$@"
 	else
-		dmenu2 -p "Run >" -dim 0.4 -nb "#404552" -nf "#b3bdcb" -sb "#5294e2" -sf "#ffffff" "$@" < "$cache"
+		dmenu2 -p "Run >" -dim 0.4 -nb "$color_background" -nf "$color_foreground" -sb "$color_blue" -sf "$color_background" "$@" < "$cache"
 	fi
 ) | ${SHELL:-"/bin/sh"} &
