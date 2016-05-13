@@ -17,9 +17,9 @@
 filetmp=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 fileresize=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 dual=$(xrandr | grep " connected" | grep "DP2")
-base="/home/meow/.colorize/current/wallpaper.png"
+base="/home/meow/.colorize/current/wallpaper-meowified.png"
 
-convert "$base" /home/meow/usr/pics/icons/lock.png -gravity center -composite -matte "$filetmp"
+convert "$base" /home/meow/.colorize/current/lock.png -gravity center -composite -matte "$filetmp"
 convert "$filetmp" -resize 1366x768 "$fileresize"
 
 if [ -z "$dual" ]; then
