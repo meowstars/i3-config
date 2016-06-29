@@ -5,7 +5,7 @@ compton &
 pasystray &
 glipper &
 unclutter &
-mopidy &
+#mopidy &
 nm-applet &
 dunst &
 sh ~/.fehbg &
