@@ -7,6 +7,9 @@ case "$1" in
     lock)
         lock
         ;;
+    genlock)
+        ~/.i3/scripts/i3lock-wrapper gen
+        ;;
     logout)
         umount /home/meow/mnt/arkena/home
         i3-msg exit
